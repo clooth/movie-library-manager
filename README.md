@@ -1,5 +1,1 @@
-Movie
-Tag
-Genre
-Director
-Link
+movie-library-manager
