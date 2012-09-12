@@ -21,6 +21,12 @@ monolog:
 
 doctrine:
     dbal:
+        driver:   pdo_mysql
+        host:     localhost
+        port:     null
+        dbname:   movies
+        user:     movies
+        password: movies
         unix_socket: /var/mysql/mysql.sock
 
 assetic:

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Acme\MovieBundle\Entity\Director
  *
- * @ORM\Table()
+ * @ORM\Table(name="directors")
  * @ORM\Entity(repositoryClass="Acme\MovieBundle\Entity\DirectorRepository")
  */
 class Director

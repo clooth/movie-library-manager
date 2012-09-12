@@ -7,7 +7,7 @@ web1:
     default_gateway: app.php
     index_list: [app.php]
 
-    php_version: 5.3.5
+    php_version: 5.4.4
     php_extensions:
         - intl
         - mbstring
@@ -19,7 +19,27 @@ web1:
         - tokenizer
         - xml
         - pdo_mysql
+        - zip
 
     php_session_autostart: Off
     php_short_open_tag: Off
     magic_quotes_gpc: Off
+
+    after_build:
+        - "echo 'parameters:' >> app/config/parameters.yml"
+        - "echo ' database_driver: pdo_mysql' >> app/config/parameters.yml"
+        - "echo ' database_host: %database.host%' >> app/config/parameters.yml"
+        - "echo ' database_port: 3306' >> app/config/parameters.yml"
+        - "echo ' database_name: %database.name%' >> app/config/parameters.yml"
+        - "echo ' database_user: %database.user%' >> app/config/parameters.yml"
+        - "echo ' database_password: %database.password%' >> app/config/parameters.yml"
+        - "echo ' mailer_transport: smtp' >> app/config/parameters.yml"
+        - "echo ' mailer_host: localhost' >> app/config/parameters.yml"
+        - "echo ' mailer_user: ~' >> app/config/parameters.yml"
+        - "echo ' mailer_password: ~' >> app/config/parameters.yml"
+        - "echo ' locale: en' >> app/config/parameters.yml"
+        - "echo ' secret: [secret]' >> app/config/parameters.yml"
+        - "php bin/composer.phar install"
+
+    before_deploy:
+        - "php app/console doctrine:schema:update --force"

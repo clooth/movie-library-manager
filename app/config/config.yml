@@ -44,8 +44,8 @@ doctrine:
         dbname:   %database_name%
         user:     %database_user%
         password: %database_password%
-        unix_socket: %database_socket%
         charset:  UTF8
+        unix_socket: /var/mysql/mysql.sock
 
     orm:
         auto_generate_proxy_classes: %kernel.debug%

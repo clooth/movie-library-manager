@@ -8,7 +8,3 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.*)$ app.php [QSA,L]
 </IfModule>
-
-php_flag  log_errors on
-php_value error_reporting -1
-php_value error_log  /Users/clooth/Development/Work/Tests/movies/web/php_errors.log
