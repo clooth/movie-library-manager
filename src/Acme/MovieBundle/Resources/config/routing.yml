@@ -1,0 +1,15 @@
+movie_index:
+    pattern: /
+    defaults: { _controller: AcmeMovieBundle:Movie:index }
+
+movie_list:
+    pattern: /list/{filters}
+    defaults: { _controller: AcmeMovieBundle:Movie:list, filters: null }
+
+movie_new:
+    pattern: /new
+    defaults: { _controller: AcmeMovieBundle:Movie:new }
+
+movie_detail:
+    pattern: /{movie}
+    defaults: { _controller: AcmeMovieBundle:Movie:show }

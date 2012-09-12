@@ -1,0 +1,17 @@
+{# src/Acme/MovieBundle/Resources/views/Movie/list.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}New Movie{% endblock %}
+
+{% block content %}
+	<form action="{{ path('movie_new') }}" method="post" {{ form_enctype(form) }}>
+		{{ form_errors(form) }}
+
+		{{ form_row(form.name) }}
+		{{ form_row(form.released) }}
+
+		{{ form_rest(form) }}
+
+		<input type="submit">
+	</form>
+{% endblock %}

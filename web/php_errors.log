@@ -1,0 +1,16 @@
+[11-Sep-2012 21:08:42 UTC] PHP Fatal error:  Uncaught exception 'ErrorException' with message 'Warning: SessionHandler::write(): open(/Users/clooth/Development/Work/Tests/movies/app/cache/dev/sessions/sess_b438p2mvfog8b5hf9uikvce8l3, O_RDWR) failed: Permission denied (13) in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php line 558' in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php:558
+Stack trace:
+#0 [internal function]: Symfony\Component\HttpKernel\Debug\ErrorHandler->handle(2, 'SessionHandler:...', '/Users/clooth/D...', 558, Array)
+#1 /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php(558): SessionHandler->write('b438p2mvfog8b5h...', '')
+#2 [internal function]: Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy->write('b438p2mvfog8b5h...', '')
+#3 [internal function]: session_write_close()
+#4 {main}
+  thrown in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php on line 558
+[11-Sep-2012 21:08:50 UTC] PHP Fatal error:  Uncaught exception 'ErrorException' with message 'Warning: SessionHandler::write(): open(/Users/clooth/Development/Work/Tests/movies/app/cache/dev/sessions/sess_b438p2mvfog8b5hf9uikvce8l3, O_RDWR) failed: Permission denied (13) in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php line 558' in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php:558
+Stack trace:
+#0 [internal function]: Symfony\Component\HttpKernel\Debug\ErrorHandler->handle(2, 'SessionHandler:...', '/Users/clooth/D...', 558, Array)
+#1 /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php(558): SessionHandler->write('b438p2mvfog8b5h...', '')
+#2 [internal function]: Symfony\Component\HttpFoundation\Session\Storage\Proxy\SessionHandlerProxy->write('b438p2mvfog8b5h...', '')
+#3 [internal function]: session_write_close()
+#4 {main}
+  thrown in /Users/clooth/Development/Work/Tests/movies/app/cache/dev/classes.php on line 558
