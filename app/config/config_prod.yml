@@ -26,4 +26,3 @@ doctrine:
         dbname:   stefania
         user:     amada
         password: ofSK1UGA
-        unix_socket: /var/run/mysqld.sock

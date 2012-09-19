@@ -27,7 +27,6 @@ doctrine:
         dbname:   movies
         user:     movies
         password: movies
-        unix_socket: /var/mysql/mysql.sock
 
 assetic:
     use_controller: true
