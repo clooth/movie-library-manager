@@ -34,7 +34,7 @@ web1:
         - "echo '   mailer_user: ~' >> app/config/parameters.yml"
         - "echo '   mailer_password: ~' >> app/config/parameters.yml"
         - "echo '   locale: en' >> app/config/parameters.yml"
-        - "echo '   secret: asdiioajsd89h3q9h83ga' >> app/config/parameters.yml"
+        - "echo '   secret: asdiiajsd89h3q9h83ga' >> app/config/parameters.yml"
         - "php bin/composer.phar install"
 
     before_deploy:
