@@ -36,8 +36,6 @@ web1:
         - "echo ' locale: en' >> app/config/parameters.yml"
         - "echo ' secret: 982348hw9ehgw3yw3egw >> app/config/parameters.yml"
         - "php bin/composer.phar install"
-        - "php bin/composer.phar update"
-        - "php bin/composer.phar install"
 
     before_deploy:
         - "php app/console doctrine:schema:update --force"
