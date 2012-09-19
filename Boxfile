@@ -26,7 +26,7 @@ web1:
     magic_quotes_gpc: Off
 
     after_build:
-        - "php bin/composer.phar install"
+        - "bin/composer.phar install"
 
     before_deploy:
         - "php app/console doctrine:schema:update --force"
