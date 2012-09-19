@@ -1,6 +1,8 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: doctrine_extensions.yml }
+    - { resource: @AcmeMovieBundle/Resources/config/services.yml }
 
 framework:
     #esi:             ~
@@ -26,7 +28,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    bundles:        ['AcmeMovieBundle']
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -50,6 +52,7 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -3,6 +3,7 @@
 namespace Acme\MovieBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * MovieRepository
@@ -12,4 +13,46 @@ use Doctrine\ORM\EntityRepository;
  */
 class MovieRepository extends EntityRepository
 {
+	/**
+	 * List n of the latest movies
+	 *
+	 * @param $limit The limit of movies to return
+	 */
+	public function getLatest($limit = 16)
+	{
+		return $this->getEntityManager()
+			->createQuery('SELECT m FROM AcmeMovieBundle:Movie m ORDER BY m.id DESC')
+			->setMaxResults($limit)
+			->getResult(Query::HYDRATE_ARRAY);
+	}
+
+	/**
+	 * Custom filtering utility for movies
+	 *
+	 * @param $filters The filters to search with.
+	 */
+	public function findWithFilters($filters=array())
+	{
+		// TODO
+	}
+
+	/**
+	 * Get similar movies by comparing the amount of common tags
+	 *
+	 * @param $movie The movie to find similar movies for
+	 * @param $limit The amount of similar movies to return
+	 */
+	public function getSimilarMovies($movie, $limit = 16)
+	{
+		$em = $this->getEntityManager();
+		$query = $em->createQuery('SELECT m, COUNT(t.id) as tag_count FROM AcmeMovieBundle:Movie m JOIN m.tags t WHERE t.id IN (:tag_ids) AND m.id != :movie_id GROUP BY m.id ORDER BY tag_count DESC');
+		$query->setParameter('movie_id', $movie->getId());
+		$query->setMaxResults($limit);
+
+		$tag_ids = array();
+		foreach ($movie->getTags() as $tag) $tag_ids[] = $tag->getId();
+		$query->setParameter('tag_ids', $tag_ids);
+
+		return $query->getResult(Query::HYDRATE_ARRAY);
+	}
 }

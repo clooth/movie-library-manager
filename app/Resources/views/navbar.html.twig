@@ -1,0 +1,31 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <!-- Dropdown menu -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <!-- Project title -->
+            <a href="#" class="brand">Movie Library Manager</a>
+
+            <!-- Collapsable navigation -->
+            <nav class="nav-collapse">
+                <!-- Main navigation -->
+                <ul class="nav">
+                    <li class="{% if 'dashboard' in route %}active{% endif %}"><a href="/">Home</a></li>
+                    <li class="{% if 'movie' in route %}active{% endif %}"><a href="/movies">Movies</a></li>
+                    <li class="{% if 'genre' in route %}active{% endif %}"><a href="/genres">Genres</a></li>
+                    <li class="{% if 'director' in route %}active{% endif %}"><a href="/directors">Directors</a></li>
+                </ul>
+
+                <!-- Movie search -->
+                <form action="#" class="navbar-search pull-right">
+                    <input type="text" class="search-query" placeholder="Search">
+                </form>
+            </nav>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+services:
+    moviebundle.form.movietype:
+        class: Acme\MovieBundle\Form\MovieType
+        arguments:
+            - @doctrine.orm.entity_manager

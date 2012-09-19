@@ -1,20 +1,28 @@
-ul.movieList {
-	list-style: none;
+body {
+	padding-top: 20px;
+}
+
+form.inline {
+	display: inline-block;
 	margin: 0;
-	padding: 0;
 }
-ul.movieList li {
-	float: left;
-	margin-left: 0 !important; /* No margin on these */
-	margin-bottom: 10px;
+
+form div.released_field select {
+	width: 100px;
 }
-ul.movieList a {
-	display: block;
-	text-align: center;
+
+table tr.active td {
+	background-color: #e1ecc3 !important;
 }
-ul.movieList a img {
+
+table tfoot tr td {
+	text-align: center !important;
 }
-ul.movieList a span {
-	display: block;
-	padding-top: 10px;
+
+table tr td ul {
+	margin: 0;
+}
+
+ul.links li {
+	margin-bottom: 5px;
 }

@@ -3,6 +3,7 @@
 namespace Acme\MovieBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * DirectorRepository
@@ -12,4 +13,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class DirectorRepository extends EntityRepository
 {
+	public function getPopular($limit = 16)
+	{
+		return $this->getEntityManager()
+			->createQuery('SELECT d, COUNT(m.id) AS movie_count FROM AcmeMovieBundle:Director d JOIN d.movies m GROUP BY d.id ORDER BY movie_count DESC')
+			->setMaxResults($limit)
+			->getResult(Query::HYDRATE_ARRAY);
+	}
 }

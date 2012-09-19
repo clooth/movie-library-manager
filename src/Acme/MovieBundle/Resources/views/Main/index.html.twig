@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span4">
+        <h3>Latest movies</h3>
+        <ul>
+        {% if latestMovies|length == 0 %}
+            <li>No movies added yet.</li>
+        {% endif %}
+
+        {% for movie in latestMovies %}
+            <li>{{ movie.name }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="span4">
+        <h3>Popular genres</h3>
+        <ul>
+            {% if popularGenres|length == 0 %}
+            <li>No genres listed.</li>
+            {% endif %}
+
+            {% for genre in popularGenres %}
+                {% set genreObj = genre[0] %}
+                {% set movie_value %}
+                    {% if genre.movie_count > 1 %}{{ genre.movie_count }} movies{% else %}One movie{% endif %}
+                {% endset %}
+                <li><a href="{{ path('movies', { 'genre': genreObj.id }) }}">{{ genreObj.name }} ({{ movie_value }})</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="span4">
+        <h3>Popular directors</h3>
+        <ul>
+            {% if popularDirectors|length == 0 %}
+                <li>No directors listed.</li>
+            {% endif %}
+
+            {% for director in popularDirectors %}
+                {% set directorObj = director[0] %}
+                {% set movie_value %}
+                    {% if director.movie_count > 1 %}{{ director.movie_count }} movies{% else %}One movie{% endif %}
+                {% endset %}
+                <li><a href="{{ path('movies', { 'director': directorObj.id }) }}">{{ directorObj.name }} ({{ movie_value }})</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

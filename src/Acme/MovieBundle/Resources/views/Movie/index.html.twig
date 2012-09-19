@@ -1,33 +1,106 @@
-{# src/Acme/MovieBundle/Resources/views/Movie/list.html.twig #}
 {% extends '::base.html.twig' %}
 
-{% block title %}Dashboard{% endblock %}
+{% block title %}Movies{% endblock %}
 
 {% block content %}
-	<div class="row-fluid">
-		<div class="span6">
-			<h3>Recently added movies</h3>
-			<ul class="movieList">
-				<li class="span3"><a href="#"><img class="img-polaroid" src="http://placehold.it/60x80" alt="Movie Poster"><span class="title">Movie Name</span></a></li>
-				<li class="span3"><a href="#"><img class="img-polaroid" src="http://placehold.it/60x80" alt="Movie Poster"><span class="title">Movie Name</span></a></li>
-				<li class="span3"><a href="#"><img class="img-polaroid" src="http://placehold.it/60x80" alt="Movie Poster"><span class="title">Movie Name</span></a></li>
-				<li class="span3"><a href="#"><img class="img-polaroid" src="http://placehold.it/60x80" alt="Movie Poster"><span class="title">Movie Name</span></a></li>
-				<li class="span3"><a href="#"><img class="img-polaroid" src="http://placehold.it/60x80" alt="Movie Poster"><span class="title">Movie Name</span></a></li>
-			</ul>
-		</div>
-		<div class="span6">
-			<h3>Add a new movie</h3>
-			<form action="#" class="newMovie">
-				
-			</form>
-		</div>
-	</div>
-	<div class="row-fluid">
-		<div class="span6">
-			<h3>Top Directors</h3>
-		</div>
-		<div class="span6">
-			<h3>Top Genres</h3>
-		</div>
-	</div>
+
+<div class="row">
+    <div class="span6">
+        <h3>Movie list</h3>
+        <table class="records_list table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Released</th>
+                    <th>Directors</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for entity in entities %}
+                <tr>
+                    <td><a href="{{ path('movie_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
+                    <td>{% if entity.released %}{{ entity.released|date('M jS, Y') }}{% endif %}</td>
+                    <td>{% if entity.directors %}{{ entity.directors|join(', ') }}{% endif %}</td>
+                    <td width="50">
+                        <div class="btn-group">
+                            <a class="btn btn-primary btn-small" href="{{ path('movie_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span> edit</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="span6">
+        <h3>Add a new movie</h3>
+
+        <form action="{{ path('movie_create') }}" method="POST" class="movie-form" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
+
+            <div class="control-group">
+                {{ form_label(form.name, 'Name', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.name, { 'attr': {'class': 'name_field', 'autofocus': 'autofocus'} }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.released, 'Release date', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.released, { 'attr': {'class': 'released_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.genres, 'Genres', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.genres, { 'attr': {'class': 'genres_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.directors, 'Directors', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.directors, { 'attr': {'class': 'directors_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.tags, 'Tags', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.tags, { 'attr': {'class': 'tags_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                    {{ form_label(form.links, 'Links', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        <ul class="unstyled links">
+                            {% for link in form.links %}
+                                <li>
+                                    <div id="{{ link.vars.id }}">
+                                    <div class="input-prepend">
+                                        <span class="add-on">Title:</span>{{ form_widget(link.title, {'attr': {'class':'input-small'}}) }}
+                                    </div>
+                                    <div class="input-prepend">
+                                        <span class="add-on">URL:</span>{{ form_widget(link.url, {'attr': {'class':'input-medium'}}) }}
+                                    </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="{{ path('movies') }}" type="button" class="btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+    </div>
+</div>
+
 {% endblock %}

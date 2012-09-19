@@ -1,15 +1,43 @@
-movie_index:
-    pattern: /
-    defaults: { _controller: AcmeMovieBundle:Movie:index }
+dashboard:
+    resource: "@AcmeMovieBundle/Controller/MainController.php"
+    type: annotation
 
-movie_list:
-    pattern: /list/{filters}
-    defaults: { _controller: AcmeMovieBundle:Movie:list, filters: null }
+movies:
+    resource: "@AcmeMovieBundle/Controller/MovieController.php"
+    type: annotation
 
-movie_new:
-    pattern: /new
-    defaults: { _controller: AcmeMovieBundle:Movie:new }
+genres:
+    resource: "@AcmeMovieBundle/Controller/GenreController.php"
+    type: annotation
 
-movie_detail:
-    pattern: /{movie}
-    defaults: { _controller: AcmeMovieBundle:Movie:show }
+directors:
+    resource: "@AcmeMovieBundle/Controller/DirectorController.php"
+    type: annotation
+
+tags:
+    resource: "@AcmeMovieBundle/Controller/TagController.php"
+    type: annotation
+
+links:
+    resource: "@AcmeMovieBundle/Controller/LinkController.php"
+    type: annotation
+
+ajax_genre:
+    pattern: /ajax_genre
+    defaults: { _controller: AcmeMovieBundle:ClassAjax:genre }
+
+ajax_director:
+    pattern: /ajax_director
+    defaults: { _controller: AcmeMovieBundle:ClassAjax:director }
+
+ajax_tag:
+    pattern: /ajax_tag
+    defaults: { _controller: AcmeMovieBundle:ClassAjax:tag }
+
+ajax_link:
+    pattern: /ajax_link
+    defaults: { _controller: AcmeMovieBundle:ClassAjax:link }
+
+ajax_movie:
+    pattern: /ajax_movie
+    defaults: { _controller: AcmeMovieBundle:ClassAjax:movie }

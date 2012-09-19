@@ -1,0 +1,79 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Editing Movie{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <h3>Editing {{ entity.name }}</h3>
+
+        <form data-movieid="{{ entity.id }}" action="{{ path('movie_update', { 'id': entity.id }) }}" class="form-horizontal movie-form" method="post" {{ form_enctype(edit_form) }}>
+                {{ form_widget(edit_form._token) }}
+
+                <div class="control-group">
+                    {{ form_label(edit_form.name, 'Name', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        {{ form_widget(edit_form.name, { 'attr': {'class': 'name_field', 'autofocus': 'autofocus'} }) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    {{ form_label(edit_form.released, 'Release date', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        {{ form_widget(edit_form.released, { 'attr': {'class': 'released_field' } }) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    {{ form_label(edit_form.genres, 'Genres', { 'label_attr': {'class': 'control-label' } }) }}
+                    <div class="controls">
+                        {{ form_widget(edit_form.genres, { 'attr': {'class': 'genres_field' } }) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    {{ form_label(edit_form.directors, 'Directors', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        {{ form_widget(edit_form.directors, { 'attr': {'class': 'directors_field' } }) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    {{ form_label(edit_form.tags, 'Tags', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        {{ form_widget(edit_form.tags, { 'attr': {'class': 'tags_field' } }) }}
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    {{ form_label(edit_form.links, 'Links', { 'label_attr': {'class': 'control-label'} }) }}
+                    <div class="controls">
+                        <ul class="unstyled links" data-prototype="{{ form_widget(edit_form.links.vars.prototype)|e }}">
+                            {% for link in edit_form.links %}
+                                <li>
+                                    <div id="{{ link.vars.id }}">
+                                    <div class="input-prepend">
+                                        <span class="add-on">Title:</span>{{ form_widget(link.title, {'attr': {'class':'input-small'}}) }}
+                                    </div>
+                                    <div class="input-prepend">
+                                        <span class="add-on">URL:</span>{{ form_widget(link.url, {'attr': {'class':'input-medium'}}) }}
+                                    </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <a href="{{ path('movies') }}" class="btn btn-primary"><span class="icon-chevron-left"></span> Back</a>
+                    <button type="submit" class="btn btn-success">Save <span class="icon-ok"></span></button>
+                </div>
+        </form>
+
+        <form class="inline" action="{{ path('movie_delete', { 'id': entity.id }) }}" method="post">{{ form_widget(delete_form._token) }}<button class="btn btn-danger" type="submit">Delete {{ entity.name }} <span class="icon-remove"></span></button></form>
+    </div>
+</div>
+
+
+{% endblock %}

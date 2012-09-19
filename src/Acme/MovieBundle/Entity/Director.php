@@ -2,7 +2,9 @@
 
 namespace Acme\MovieBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Acme\MovieBundle\Entity\Director
@@ -28,6 +30,27 @@ class Director
      */
     private $name;
 
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Movie", mappedBy="directors", cascade={"persist"})
+     */
+    private $movies;
+
+    public function __construct()
+    {
+        $this->movies = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
 
     /**
      * Get id
@@ -60,5 +83,25 @@ class Director
     public function getName()
     {
         return $this->name;
+    }
+
+
+    /**
+     * Get movies
+     *
+     * @return ArrayCollection
+     */
+    public function getMovies()
+    {
+       return $this->movies;
+    }
+
+    /**
+     * Add movie
+     */
+    public function addMovie(\Acme\MovieBundle\Entity\Movie $movie)
+    {
+        $movie->addDirector($this);
+        $this->movies[] = $movie;
     }
 }

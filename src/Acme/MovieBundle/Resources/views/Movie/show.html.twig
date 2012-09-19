@@ -1,0 +1,89 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}{{ entity.name }}{% endblock %}
+
+{% block content %}
+
+<div class="row">
+    <div class="span6">
+        <h3>{{ entity.name }}</h3>
+        
+        <table class="record_properties table table-bordered table-rounded">
+            <tbody>
+                <tr>
+                    <th>Released</th>
+                    <td>{{ entity.released|date('M jS, Y') }}</td>
+                </tr>
+                <tr>
+                    <th>Director(s)</th>
+                    {% if entity.directors|length > 0 %}
+                    <td>
+                        <ul class="unstyled">
+                            {% for d in entity.directors %}
+                            <li><a href="{{ path('movies', { 'director': d.id }) }}">{{ d.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    {% else %}
+                    <td>No directors specified.</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Genres</th>
+                    {% if entity.genres|length > 0 %}
+                    <td>
+                        <ul class="unstyled">
+                            {% for g in entity.genres %}
+                            <li><a href="{{ path('movies', { 'genre': g.id }) }}">{{ g.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    {% else %}
+                    <td>No genres specified.</td>
+                    {% endif %}
+                </tr>
+                <tr>
+                    <th>Tags</th>
+                    {% if entity.tags|length > 0 %}
+                    <td>
+                        <ul class="unstyled">
+                            {% for t in entity.tags %}
+                            <li><a href="{{ path('movies', { 'tag': t.id }) }}">{{ t.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    {% else %}
+                    <td>No tags given.</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <a href="{{ path('movies') }}" class="btn btn-primary"><span class="icon-chevron-left"></span> Back to the list</a>
+        <a href="{{ path('movie_edit', { 'id': entity.id }) }}" class="btn btn-info">Edit <span class="icon-edit"></span></a>
+        <form class="inline" action="{{ path('movie_delete', { 'id': entity.id }) }}" method="post">{{ form_widget(delete_form) }}<button class="btn btn-danger" type="submit">Delete <span class="icon-remove"></span></button></form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="span6">
+        <h3>Similar movies</h3>
+        <table class="table table-bordered table-rounded">
+            <tbody>
+                {% if similar_movies|length == 0 %}
+                <tr><td>No similar movies found.</td></tr>
+                {% endif %}
+                {% for movie in similar_movies %}
+                    <tr>
+                        <td>{{ movie.name }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -20,7 +20,14 @@ monolog:
 
 doctrine:
     dbal:
-        database_name: %database.name%
-        database_user: %database.user%
-        database_password: %database.password%
-        database_socket: %database.socket%
+        driver:   pdo_mysql
+        host:     localhost
+        port:     null
+        dbname:   movies
+        user:     movies
+        password: movies
+        unix_socket: /var/mysql/mysql.sock
+#        database_name: %database.name%
+#        database_user: %database.user%
+#        database_password: %database.password%
+#        database_socket: %database.socket%

@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Directors{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="span6">
+            <h3>List of available movie directors</h3>
+            <table class="records_list table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for entity in entities %}
+                    <tr id="genre-{{ entity.id }}" {% if director_id == entity.id %}class="active"{% endif %}>
+                        <td>{{ entity.name }}</td>
+                        <td width="100">
+                            <div class="btn-group">
+                                <a class="btn btn-primary btn-small" href="{{ path('director_edit', { 'id': entity.id }) }}"><span class="icon-edit"></span> edit</a>
+                                <a class="btn btn-primary btn-small" href="{{ path('movies', { 'director': entity.id }) }}"><span class="icon-list"></span> movies</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="span6">
+            <h3>Add a new Director</h3>
+            <form class="form-vertical" action="{{ path('director_create') }}" method="post" {{ form_enctype(form) }}>
+                {{ form_errors(form) }}
+                {{ form_widget(form._token) }}
+
+                <div class="control-group">
+                    <label for="name" class="control-label">Name</label>
+                    <div class="controls">
+                        {{ form_widget(form.name, { 'attr': {'class': 'name_field', 'autofocus': 'autofocus'} }) }}
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

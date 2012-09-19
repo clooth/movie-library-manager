@@ -1,17 +1,63 @@
-{# src/Acme/MovieBundle/Resources/views/Movie/list.html.twig #}
 {% extends '::base.html.twig' %}
 
 {% block title %}New Movie{% endblock %}
 
 {% block content %}
-	<form action="{{ path('movie_new') }}" method="post" {{ form_enctype(form) }}>
-		{{ form_errors(form) }}
+<div class="row">
+    <div class="span12">
+        <h1>Add a new Movie</h1>
 
-		{{ form_row(form.name) }}
-		{{ form_row(form.released) }}
+        <form action="{{ path('movie_create') }}" method="POST" class="form-horizontal movie-form" {{ form_enctype(form) }}>
+            {{ form_widget(form._token) }}
 
-		{{ form_rest(form) }}
+            <div class="control-group">
+                {{ form_label(form.name, 'Name', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.name, { 'attr': {'class': 'name_field', 'autofocus': 'autofocus'} }) }}
+                </div>
+            </div>
 
-		<input type="submit">
-	</form>
+            <div class="control-group">
+                {{ form_label(form.released, 'Release date', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.released, { 'attr': {'class': 'released_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.genres, 'Genres', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.genres, { 'attr': {'class': 'genres_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.directors, 'Directors', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.directors, { 'attr': {'class': 'directors_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.tags, 'Tags', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    {{ form_widget(form.tags, { 'attr': {'class': 'tags_field' } }) }}
+                </div>
+            </div>
+
+            <div class="control-group">
+                {{ form_label(form.links, 'Links', { 'label_attr': {'class': 'control-label'} }) }}
+                <div class="controls">
+                    <ul class="links" data-prototype="{{ form_widget(form.links.vars.prototype)|e }}"></ul>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a href="{{ path('movies') }}" type="button" class="btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
 {% endblock %}

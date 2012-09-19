@@ -2,7 +2,9 @@
 
 namespace Acme\MovieBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Acme\MovieBundle\Entity\Genre
@@ -28,6 +30,13 @@ class Genre
      */
     private $name;
 
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
     /**
      * @ORM\ManyToMany(targetEntity="Movie", mappedBy="genres", cascade={"persist"})
      */
@@ -36,6 +45,10 @@ class Genre
     public function __construct()
     {
         $this->movies = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->getName();
     }
 
     /**
@@ -86,7 +99,8 @@ class Genre
      */
     public function addMovie(\Acme\MovieBundle\Entity\Movie $movie)
     {
-        $movie->addGenre($this);
-        $this->movies[] = $movie;
+        if (!$this->movies->contains($movie)) {
+            $this->movies->add($movie);
+        }
     }
 }
