@@ -38,4 +38,4 @@ web1:
         - "php bin/composer.phar install"
 
     before_deploy:
-        - "php app/console doctrine:schema:update --force"
+        - "php app/console doctrine:schema:update --force --env=prod"
